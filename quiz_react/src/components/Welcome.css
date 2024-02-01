@@ -1,0 +1,21 @@
+#welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2px;
+  max-width: 600px;
+}
+
+#welcome h2,
+#welcome p {
+  margin-bottom: 1rem;
+}
+
+#welcome p {
+  color: #8435de;
+}
+
+#welcome img {
+  margin-top: 4rem;
+}
