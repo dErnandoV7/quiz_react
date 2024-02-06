@@ -21,7 +21,6 @@ const quizReducer = (state, action) => {
       const reorderedQuestions = questions.sort(() => {
         return Math.random() - 0.5;
       });
-      console.log("reordenou");
       return {
         ...state,
         questions: reorderedQuestions,
@@ -40,7 +39,20 @@ const quizReducer = (state, action) => {
       };
 
     case "RESET":
-      return initialState
+      return initialState;
+
+    case "SELECT_RESPONSE":
+      const responseCorrect = questions[state.currentQuestion].answer;
+      let isCorrect = false
+      let newScore = state.score + 1
+
+      if (responseCorrect === action.value) isCorrect = true
+      
+      return {
+        ...state,
+        score: isCorrect ? newScore : state.score
+      };
+      
     default:
       return state;
   }
