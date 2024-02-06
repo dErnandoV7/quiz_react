@@ -7,6 +7,7 @@ const initialState = {
   gameState: STAGES[0],
   questions,
   currentQuestion: 0,
+  score: 0,
 };
 
 const quizReducer = (state, action) => {
@@ -18,13 +19,28 @@ const quizReducer = (state, action) => {
       };
     case "REORDER_QUESTIONS":
       const reorderedQuestions = questions.sort(() => {
-        return Math.random() - .5;
+        return Math.random() - 0.5;
       });
       console.log("reordenou");
       return {
         ...state,
         questions: reorderedQuestions,
       };
+
+    case "CHANGE_QUESTION":
+      const nextQuestion = state.currentQuestion + 1;
+      let endGame = false;
+
+      if (!questions[nextQuestion]) endGame = true;
+
+      return {
+        ...state,
+        currentQuestion: nextQuestion,
+        gameState: endGame ? STAGES[2] : state.gameState,
+      };
+
+    case "RESET":
+      return initialState
     default:
       return state;
   }
@@ -39,4 +55,3 @@ export const QuizProvider = ({ children }) => {
 
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;
 };
-
