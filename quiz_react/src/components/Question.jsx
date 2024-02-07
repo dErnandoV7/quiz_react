@@ -3,29 +3,19 @@ import { QuizContext } from "../context/quiz";
 
 import "./Question.css";
 
+import Option from "./Option";
+
 const Question = () => {
   const [quizState, dispatch] = useContext(QuizContext);
   const currentQuestion = quizState.questions[quizState.currentQuestion];
   const options = currentQuestion.options;
 
-  function selectOption(index) {
-    const optionsEl = document.querySelectorAll(".option");
-
-    optionsEl.forEach((option) => {
-      option.classList.remove("select");
+  function selectOption(option) {
+    dispatch({
+      type: "CHECK_ANSWER",
+      payload: { answer: currentQuestion.answer, option },
     });
-
-    optionsEl[index].classList.add("select");
   }
-
-  useEffect(() => {
-    const optionsEl = document.querySelectorAll(".option");
-
-    optionsEl.forEach((option) => {
-      option.classList.remove("select");
-    });
-  }, [quizState.currentQuestion]);
-
   return (
     <div id="question">
       <p>
@@ -33,26 +23,24 @@ const Question = () => {
         {quizState.questions.length}
       </p>
       <h1>{currentQuestion.question}</h1>
-
+      <span>Será considerada somente a sua primeira seleção</span>
       <div className="options-container">
         <div id="options-container">
           {options.map((option, index) => (
-            <p
-              className="option"
-              key={index}
-              onClick={() => {
-                dispatch({ type: "SELECT_RESPONSE", value: option });
-                selectOption(index);
-              }}
-            >
-              {option}
-            </p>
+            <Option
+              key={option}
+              option={option}
+              answer={quizState.answerSelected}
+              selectOption={selectOption}
+            />
           ))}
         </div>
       </div>
-      <button onClick={() => dispatch({ type: "CHANGE_QUESTION" })}>
-        Continuar
-      </button>
+      {quizState.answerSelected && (
+        <button onClick={() => dispatch({ type: "CHANGE_QUESTION" })}>
+          Continuar
+        </button>
+      )}
     </div>
   );
 };

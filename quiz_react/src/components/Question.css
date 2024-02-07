@@ -24,21 +24,8 @@
   border: 2px solid #fff;
 }
 
-.options-container {
-  margin-bottom: 30px;
-}
-
-.option {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  border: 1px solid #fff;
-  border-radius: 1rem;
-  padding: 14px 10px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.select {
-  background: rgb(97, 46, 156);
+#question span {
+  font-size: 12px;
+  margin-bottom: 10px;
+  display: inline-block;
 }
