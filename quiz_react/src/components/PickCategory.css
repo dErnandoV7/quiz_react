@@ -1,0 +1,41 @@
+#category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2px;
+  max-width: 500px;
+}
+
+#category h2,
+#category p {
+  margin-bottom: 1rem;
+}
+
+#category p {
+  color: #8435de;
+}
+
+#category img {
+  margin-top: 4rem;
+  max-width: 300px;
+}
+
+button {
+  margin-bottom: 1rem;
+}
+
+.category-options {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.category-options button {
+  margin: 0;
+  width: 90%;
+  max-width: 150px;
+}
